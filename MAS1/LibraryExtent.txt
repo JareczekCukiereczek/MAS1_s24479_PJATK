@@ -1,0 +1,1 @@
+[{"Title":"Chic","Author":{"Name":"Tomasz Chic"},"ISBN":"1234","Year":2001},{"Title":"Gakko","Author":{"Name":"Tomaszewski"},"ISBN":"12345","Year":2001}]

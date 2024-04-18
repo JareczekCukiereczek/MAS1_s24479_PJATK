@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "4nCpFxFZk0IxvCcHAtCkqMTeyAdprPCcTMQXDk0Y+VL6LGN0xjx67oY0cxy0Of/2KZQrf3V0/gI3V6itSnkiTw==",
+  "success": true,
+  "projectFilePath": "/Users/kuba/Documents/MAS/MAS1/MAS1/MAS1/MAS1.csproj",
+  "expectedPackageFiles": [
+    "/Users/kuba/.nuget/packages/microsoft.netcore.app.ref/6.0.25/microsoft.netcore.app.ref.6.0.25.nupkg.sha512",
+    "/Users/kuba/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.25/microsoft.aspnetcore.app.ref.6.0.25.nupkg.sha512",
+    "/Users/kuba/.nuget/packages/microsoft.netcore.app.host.osx-arm64/6.0.25/microsoft.netcore.app.host.osx-arm64.6.0.25.nupkg.sha512"
+  ],
+  "logs": []
+}
