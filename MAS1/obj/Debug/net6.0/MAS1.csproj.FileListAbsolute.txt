@@ -26,3 +26,4 @@ C:/Users/Bartek/Desktop/MAS1/MAS1/obj/Debug/net6.0/ref/MAS1.dll
 /Users/kuba/Documents/MAS/MAS1/MAS1/MAS1/obj/Debug/net6.0/MAS1.pdb
 /Users/kuba/Documents/MAS/MAS1/MAS1/MAS1/obj/Debug/net6.0/MAS1.genruntimeconfig.cache
 /Users/kuba/Documents/MAS/MAS1/MAS1/MAS1/obj/Debug/net6.0/ref/MAS1.dll
+/Users/kuba/Documents/MAS/MAS1/MAS1/MAS1/obj/Debug/net6.0/MAS1.sourcelink.json
