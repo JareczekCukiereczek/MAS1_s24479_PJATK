@@ -6,9 +6,14 @@ public class Book
     public string ISBN { get; set; } // Atrybut obiektowy
 
     public static string Material = "Paper"; // Atrubut klasowy - wspolny
-    //atytbut opcjonalny - nei wszystkie ksiazki maja
-    //atrybut powtarzlny - cos co jest kilka - lista
-    // atrybut wspolny dla wszystkich ksiązek - material = paper statick atrybt
+
+    public List<string> LanguagesOfBooks = new List<string>(){"ENG", "Pl","GER","SPA"}; //Atrybyt powtrzalny
+    
+    public int OptionalRateBook { get; set; } //wyliczanie średniej
+    
+    // atytbut opcjonalny - nei wszystkie ksiazki maja                                      
+    // atrybut powtarzlny - cos co jest kilka - lista - w kilku językach                    + 
+    // atrybut wspolny dla wszystkich ksiązek - material = paper statick atrybt - dodany    + 
     //atrybut pochodny - wyliczalny z pozostałych dwóch - najlepiej w getterze wyliczać
     //atrubt ocena ksiąki 
     public int Year { get; set; }
