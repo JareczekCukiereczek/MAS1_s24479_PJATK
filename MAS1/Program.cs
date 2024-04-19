@@ -33,7 +33,8 @@ class Program
                 Console.WriteLine("1. Show all books");
                 Console.WriteLine("2. Add a book");
                 Console.WriteLine("3. Remove a book");
-                Console.WriteLine("4. Save and exit");
+                Console.WriteLine("4. Show avarage books rating");
+                Console.WriteLine("5. Save and exit");
                 Console.Write("Enter your choice: ");
 
                 if (!int.TryParse(Console.ReadLine(), out int choice))
@@ -54,10 +55,14 @@ class Program
                         RemoveBook(library);
                         break;
                     case 4:
+                        var averageRating = library.CalculateAverageRating();
+                        Console.WriteLine($"Average rating of all rated books: {averageRating}");
+                        break;
+                    case 5:
                         loop = false;
                         break;
                     default:
-                        Console.WriteLine("Invalid choice. Please enter a number between 1 and 4.");
+                        Console.WriteLine("Invalid choice. Please enter a number between 1 and 5.");
                         break;
                 }
                 Console.WriteLine("Press Enter to continue...");
@@ -78,10 +83,24 @@ class Program
             var isbn = Console.ReadLine();
             Console.WriteLine("Year: ");
             var year = int.Parse(Console.ReadLine());
+            Console.WriteLine("Rating - optional(non-rating - press space): ");
+            int? rating = null;
+            int parsedRating;
+            if (int.TryParse(Console.ReadLine(), out parsedRating))
+            {
+                rating = parsedRating;
+            }
+            Console.WriteLine("Has illustrations (True/False): ");
+            var hasIllustrations = bool.Parse(Console.ReadLine());
 
-            var newBook = new Book(title, author, isbn, year);
+            var newBook = new Book(title, author, isbn, year)
+            {
+                RatingAllBooks = rating,
+                HasIllustrations = hasIllustrations
+            };
             library.AddBook(newBook);
         }
+
 
         static void RemoveBook(Library library)
         {

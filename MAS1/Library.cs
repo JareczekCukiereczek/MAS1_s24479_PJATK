@@ -12,12 +12,39 @@ public class Library
         int i = 1;
         foreach (var book in Books)
         {
-            Console.WriteLine($"{i}. {book}");
+            Console.WriteLine($"{i}. Title: {book.Title}, Author: {book.Author}, ISBN: {book.ISBN}, Year: {book.Year}, Added Date: {book.AddedDate.ToString("dd-MM-yyyy")}, Days Until Sales Deadline: {book.DaysUntilDeadline}, Rating: {(book.RatingAllBooks.HasValue ? book.RatingAllBooks.ToString() : "Not rated")}, Has Illustrations: {book.HasIllustrations}");
             Console.WriteLine("");
             i++;
         }
     }
-    //wylicz srednią ocene wszydstkich ksiązek
+
+
+    public double CalculateAverageRating()
+    {
+        if (Books.Count == 0)
+        {
+            return 0;
+        }
+
+        double totalRating = 0;
+        int ratedBooksCount = 0;
+        foreach (var book in Books)
+        {
+            if (book.RatingAllBooks.HasValue)
+            {
+                totalRating += book.RatingAllBooks.Value;
+                ratedBooksCount++;
+            }
+        }
+
+        if (ratedBooksCount == 0)
+        {
+            return 0;
+        }
+
+        return totalRating / ratedBooksCount;
+    }
+   
     //przeciązenie - metoda ta sama nazwa inna liczba argumentów
     public string SerializeLibrary() => JsonSerializer.Serialize(Books);
     public void DeserializeLibrary(string json)
