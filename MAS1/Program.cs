@@ -1,4 +1,6 @@
-﻿namespace MAS1
+﻿using System.Globalization;
+
+namespace MAS1
 {
     class Program
     {
@@ -66,6 +68,12 @@
             var isbn = Console.ReadLine();
             Console.WriteLine("Year: ");
             var year = int.Parse(Console.ReadLine());
+            Console.WriteLine("Sales Deadline (yyyy-MM-dd): "); // Dodajemy pole dla SalesDeadline
+            DateTime salesDeadline;
+            while (!DateTime.TryParseExact(Console.ReadLine(), "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out salesDeadline))
+            {
+                Console.WriteLine("Invalid date format. Please enter date in yyyy-MM-dd format:");
+            }
             Console.WriteLine("Rating - optional(non-rating - press space): ");
             int? rating = null;
             int parsedRating;
@@ -81,6 +89,7 @@
                 RatingAllBooks = rating,
                 HasIllustrations = hasIllustrations
             };
+            newBook.SetSalesDeadline(salesDeadline); // Ustawienie daty sprzedaży
             library.AddBook(newBook);
         }
 
