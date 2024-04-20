@@ -1,28 +1,12 @@
-﻿namespace MAS1;
-class Program
+﻿namespace MAS1
+{
+    class Program
     {
         static void Main(string[] args)
         {
-            var library = InitializeLibrary();
+            var library = Library.InitializeLibraryFromFile();
             MainLoop(library);
-            SaveLibrary(library);
-        }
-
-        static Library InitializeLibrary()
-        {
-            var library = new Library();
-            var filePath = "/Users/kuba/Documents/MAS/MAS1/MAS1/MAS1/LibraryExtent.txt";
-
-            if (File.Exists(filePath))
-            {
-                library.DeserializeLibrary(File.ReadAllText(filePath));
-            }
-            else
-            {
-                Console.WriteLine("LibraryExtent.txt does not exist or is empty. Creating a new library.");
-            }
-
-            return library;
+            library.SaveLibraryToFile();
         }
 
         static void MainLoop(Library library)
@@ -33,7 +17,7 @@ class Program
                 Console.WriteLine("1. Show all books");
                 Console.WriteLine("2. Add a book");
                 Console.WriteLine("3. Remove a book");
-                Console.WriteLine("4. Show avarage books rating");
+                Console.WriteLine("4. Show average books rating");
                 Console.WriteLine("5. Save and exit");
                 Console.Write("Enter your choice: ");
 
@@ -71,7 +55,6 @@ class Program
             } while (loop);
         }
 
-
         static void AddBook(Library library)
         {
             Console.WriteLine("Title: ");
@@ -101,14 +84,13 @@ class Program
             library.AddBook(newBook);
         }
 
-
         static void RemoveBook(Library library)
         {
             library.ShowAllBooks();
             Console.WriteLine("Enter the number of the book to remove: ");
             var bookNumber = int.Parse(Console.ReadLine());
 
-            if (bookNumber < 1 || bookNumber >= Library.Books.Count)
+            if (bookNumber < 1 || bookNumber > Library.Books.Count)
             {
                 Console.WriteLine("Invalid number");
                 return;
@@ -117,13 +99,5 @@ class Program
             library.RemoveBook(Library.Books[bookNumber - 1]);
             Console.WriteLine("Book removed successfully!");
         }
-
-        static void SaveLibrary(Library library)
-        {
-            var filePath = "/Users/kuba/Documents/MAS/MAS1/MAS1/MAS1/LibraryExtent.txt";
-            File.WriteAllText(filePath, library.SerializeLibrary());
-        }
     }
-
-
-
+}

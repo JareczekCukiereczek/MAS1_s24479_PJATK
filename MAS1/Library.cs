@@ -18,7 +18,6 @@ public class Library
         }
     }
 
-
     public double CalculateAverageRating()
     {
         if (Books.Count == 0)
@@ -44,12 +43,37 @@ public class Library
 
         return totalRating / ratedBooksCount;
     }
-   
+
     //przeciązenie - metoda ta sama nazwa inna liczba argumentów
     public string SerializeLibrary() => JsonSerializer.Serialize(Books);
     public void DeserializeLibrary(string json)
     {
         if (!string.IsNullOrWhiteSpace(json))
             Books.AddRange(JsonSerializer.Deserialize<List<Book>>(json));
+    }
+
+    // Metoda do zapisywania biblioteki do pliku
+    public void SaveLibraryToFile()
+    {
+        var filePath = "/Users/kuba/Documents/MAS/MAS1/MAS1/MAS1/LibraryExtent.txt";
+        File.WriteAllText(filePath, SerializeLibrary());
+    }
+
+    // Metoda do inicjalizacji biblioteki z pliku
+    public static Library InitializeLibraryFromFile()
+    {
+        var library = new Library();
+        var filePath = "/Users/kuba/Documents/MAS/MAS1/MAS1/MAS1/LibraryExtent.txt";
+
+        if (File.Exists(filePath))
+        {
+            library.DeserializeLibrary(File.ReadAllText(filePath));
+        }
+        else
+        {
+            Console.WriteLine("LibraryExtent.txt does not exist or is empty. Creating a new library.");
+        }
+
+        return library;
     }
 }
