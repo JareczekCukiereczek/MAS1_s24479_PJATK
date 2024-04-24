@@ -2,17 +2,14 @@
 
 namespace MAS1
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
+    class Program{
+        static void Main(string[] args){
             var lib = Library.InitLibFromFile();
             MainLoop(lib);
             lib.SaveLibToFile();
         }
 
-        static void MainLoop(Library library)
-        {
+        static void MainLoop(Library library){
             bool loop = true;
             do
             {
@@ -133,10 +130,5 @@ namespace MAS1
                     break;
             }
         }
-
-        
-        
-        
-        
     }
 }

@@ -46,8 +46,8 @@ public class Library
     }
 
     
-    public string SerializeLibrary() => JsonSerializer.Serialize(Books);
-    public void DeserializeLibrary(string json)
+    public string SerialLiB() => JsonSerializer.Serialize(Books);
+    public void DeserialLib(string json)
     {
         if (!string.IsNullOrWhiteSpace(json))
             Books.AddRange(JsonSerializer.Deserialize<List<Book>>(json));
@@ -57,7 +57,7 @@ public class Library
     public void SaveLibToFile()
     {
         var pathToFile = "/Users/kuba/Documents/MAS/MAS1/MAS1/MAS1/LibraryExtent.txt";
-        File.WriteAllText(pathToFile, SerializeLibrary());
+        File.WriteAllText(pathToFile, SerialLiB());
     }
 
    //Odczyt
@@ -68,7 +68,7 @@ public class Library
 
         if (File.Exists(filePath))
         {
-            library.DeserializeLibrary(File.ReadAllText(filePath));
+            library.DeserialLib(File.ReadAllText(filePath));
         }
         else
         {
@@ -92,7 +92,7 @@ public class Library
 
     public void RemoveBook(string title)
     {
-        var bookToRemove = Books.FirstOrDefault(book => book.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
+        var bookToRemove = Books.FirstOrDefault(book => book.Title.Equals(title));
         if (bookToRemove != null)
         {
             Books.Remove(bookToRemove);
