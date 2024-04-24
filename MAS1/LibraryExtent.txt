@@ -1,1 +1,0 @@
-[{"Title":"RadekBrowarek","Author":{"Name":"Macias"},"ISBN":"23445888","RatingAllBooks":null,"HasIllustrations":true,"AddedDate":"2024-04-22T22:31:35.003057+02:00","SalesDeadline":"2024-10-09T00:00:00","DaysUntilDeadline":169,"Year":2009}]

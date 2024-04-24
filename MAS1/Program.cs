@@ -16,12 +16,12 @@ namespace MAS1
             bool loop = true;
             do
             {
-                Console.WriteLine("1. Show all books");
-                Console.WriteLine("2. Add a book");
-                Console.WriteLine("3. Remove a book");
-                Console.WriteLine("4. Show average books rating");
-                Console.WriteLine("5. Save and exit");
-                Console.Write("Enter your choice: ");
+                Console.WriteLine("1. Pokaz ksiazki");
+                Console.WriteLine("2. Dodaj ksiazki");
+                Console.WriteLine("3. Usun ksiazki");
+                Console.WriteLine("4. Pokaz srednia ocene ksiazek");
+                Console.WriteLine("5. Zapisz i wyjdz");
+                Console.Write("Wybierz numer: ");
 
                 if (!int.TryParse(Console.ReadLine(), out int choice))
                 {
