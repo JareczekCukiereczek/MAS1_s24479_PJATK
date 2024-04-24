@@ -6,9 +6,9 @@ namespace MAS1
     {
         static void Main(string[] args)
         {
-            var library = Library.InitializeLibraryFromFile();
-            MainLoop(library);
-            library.SaveLibraryToFile();
+            var lib = Library.InitLibFromFile();
+            MainLoop(lib);
+            lib.SaveLibToFile();
         }
 
         static void MainLoop(Library library)
@@ -25,7 +25,7 @@ namespace MAS1
 
                 if (!int.TryParse(Console.ReadLine(), out int choice))
                 {
-                    Console.WriteLine("Invalid input. Please enter a number.");
+                    Console.WriteLine("Zly numer. Wprowadz poprawny numer.");
                     continue;
                 }
 
@@ -42,16 +42,16 @@ namespace MAS1
                         break;
                     case 4:
                         var averageRating = library.CalculateAverageRating();
-                        Console.WriteLine($"Average rating of all rated books: {averageRating}");
+                        Console.WriteLine($"Srednia ocena ksiazek: {averageRating}");
                         break;
                     case 5:
                         loop = false;
                         break;
                     default:
-                        Console.WriteLine("Invalid choice. Please enter a number between 1 and 5.");
+                        Console.WriteLine("Zly numer - wprowadz poprawny.");
                         break;
                 }
-                Console.WriteLine("Press Enter to continue...");
+                Console.WriteLine("Nacisij enter aby kontynuowac...");
                 Console.ReadLine();
                 Console.Clear();
             } while (loop);
@@ -59,54 +59,84 @@ namespace MAS1
 
         static void AddBook(Library library)
         {
-            Console.WriteLine("Title: ");
+            Console.WriteLine("Tytul: ");
             var title = Console.ReadLine();
-            Console.WriteLine("Author: ");
+            Console.WriteLine("Autor: ");
             var authorName = Console.ReadLine();
             var author = new Author(authorName);
             Console.WriteLine("ISBN: ");
             var isbn = Console.ReadLine();
-            Console.WriteLine("Year: ");
+            Console.WriteLine("Rok: ");
             var year = int.Parse(Console.ReadLine());
-            Console.WriteLine("Sales Deadline (yyyy-MM-dd): "); // Dodajemy pole dla SalesDeadline
+            Console.WriteLine("Deadline sprzedazy (yyyy-MM-dd): ");
             DateTime salesDeadline;
             while (!DateTime.TryParseExact(Console.ReadLine(), "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out salesDeadline))
             {
-                Console.WriteLine("Invalid date format. Please enter date in yyyy-MM-dd format:");
+                Console.WriteLine("Zly format - wprowadz poprawny yyyy-MM-dd:");
             }
-            Console.WriteLine("Rating - optional(non-rating - press space): ");
+            Console.WriteLine("Ocena - opcjonalna (Enter jak bez oceny): ");
             int? rating = null;
             int parsedRating;
             if (int.TryParse(Console.ReadLine(), out parsedRating))
             {
                 rating = parsedRating;
             }
-            Console.WriteLine("Has illustrations (True/False): ");
-            var hasIllustrations = bool.Parse(Console.ReadLine());
+            Console.WriteLine("Ma obrazki ? (True/False, enter aby kontynuowac): ");
+            bool hasIllustrations;
+            if (!bool.TryParse(Console.ReadLine(), out hasIllustrations))
+            {
+                hasIllustrations = false; 
+            }
 
             var newBook = new Book(title, author, isbn, year)
             {
                 RatingAllBooks = rating,
                 HasIllustrations = hasIllustrations
             };
-            newBook.SetSalesDeadline(salesDeadline); // Ustawienie daty sprzedaży
+            newBook.SetSalesDeadline(salesDeadline);
             library.AddBook(newBook);
         }
 
+
         static void RemoveBook(Library library)
         {
-            library.ShowAllBooks();
-            Console.WriteLine("Enter the number of the book to remove: ");
-            var bookNumber = int.Parse(Console.ReadLine());
+            Console.WriteLine("1. Usun wg. index");
+            Console.WriteLine("2. Usun wg. title");
+            Console.Write("Wprowadz numer: ");
 
-            if (bookNumber < 1 || bookNumber > Library.Books.Count)
+            if (!int.TryParse(Console.ReadLine(), out int choice))
             {
-                Console.WriteLine("Invalid number");
+                Console.WriteLine("Zly numer. Wprowadz poprawny.");
                 return;
             }
 
-            library.RemoveBook(Library.Books[bookNumber - 1]);
-            Console.WriteLine("Book removed successfully!");
+            switch (choice)
+            {
+                case 1:
+                    Console.WriteLine("Wprowadz index do usuniecia: ");
+                    if (int.TryParse(Console.ReadLine(), out int index))
+                    {
+                        library.RemoveBook(index-1);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Zly index. Wprowadz poprawny.");
+                    }
+                    break;
+                case 2:
+                    Console.WriteLine("Wprowadz tytul do usuniecia: ");
+                    string title = Console.ReadLine();
+                    library.RemoveBook(title);
+                    break;
+                default:
+                    Console.WriteLine("Zly wybor. Wprowadz numer pomiedzy 1 - 3.");
+                    break;
+            }
         }
+
+        
+        
+        
+        
     }
 }

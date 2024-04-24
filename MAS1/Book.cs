@@ -4,10 +4,10 @@ public class Book
     public string Title { get; set; }
     public Author Author { get; set; } // Atrybut złozony
     public string ISBN { get; set; }// Atrybut obiektowy
-    public static string Material = "Paper";// Atrubut klasowy - wspolny
+    public static string Material = "Papier";// Atrybut klasowy - wspolny
     public List<string> LanguagesOfBooks = new List<string>() { "ENG", "Pl", "GER", "SPA" };//Atrybyt powtrzalny
     public int? RatingAllBooks { get; set; }// Atrybut opcjonalny ocena książki/pochodny
-    public bool HasIllustrations { get; set; }// Atrybut opcjonalny
+    public bool? HasIllustrations { get; set; }// Atrybut opcjonalny
     public DateTime AddedDate { get; set; }
     private DateTime _salesDeadline;
 
@@ -16,17 +16,17 @@ public class Book
         get => _salesDeadline;
         set
         {
-            if (value >= AddedDate) // Sprawdzenie czy data sprzedaży jest równa lub późniejsza niż data dodania
+            if (value >= AddedDate) 
                 _salesDeadline = value;
             else
-                Console.WriteLine("Sales deadline cannot be earlier than the added date.");
+                Console.WriteLine("Deadline nie moze byc wczesniejszy niz data dodania.");
         }
     }
-    public int DaysUntilDeadline => (int)(SalesDeadline - AddedDate).TotalDays; // Liczba dni do terminu sprzedaży
+    public int DaysUntilDeadline => (int)(SalesDeadline - AddedDate).TotalDays; 
 
     public int Year { get; set; }
     
-    // atytbut opcjonalny - nei wszystkie ksiazki maja  np.ilustracje                       +         
+    // atytbut opcjonalny - nei wszystkie ksiazki maja  np.ilustracje  lub rating           +         
     // atrybut powtarzlny - cos co jest kilka - lista - w kilku językach                    + 
     // atrybut wspolny dla wszystkich ksiązek - material = paper statick atrybt - dodany    + 
     //atrybut pochodny - wyliczalny z pozostałych dwóch - najlepiej w getterze wyliczać     +
@@ -40,7 +40,7 @@ public class Book
         ISBN = isbn;
         Year = year;
         AddedDate = DateTime.Now;
-        SalesDeadline = AddedDate.AddDays(365);// Domyślnie ustawiamy termin sprzedaży na rok od daty dodania
+        SalesDeadline = AddedDate.AddDays(365);
     }
 
     public void SetSalesDeadline(DateTime deadline)
@@ -50,6 +50,6 @@ public class Book
 
     public override string ToString()
     {
-        return $"Title: {Title}, Author: {Author}, ISBN: {ISBN}, Year: {Year}, Added Date: {AddedDate.ToString("dd-MM-yyyy")}, Days Until Sales Deadline: {DaysUntilDeadline}, Rating: {(RatingAllBooks.HasValue ? RatingAllBooks.ToString() : "Not rated")}, Has Illustrations: {HasIllustrations}";
+        return $"Tytul: {Title}, Autor: {Author}, ISBN: {ISBN}, Rok: {Year}, Data dodania: {AddedDate.ToString("dd-MM-yyyy")}, Ilosc dni dopuszczenia do sprzedazy: {DaysUntilDeadline}, Ocena: {(RatingAllBooks.HasValue ? RatingAllBooks.ToString() : "Brak oceny")}, Ma ilustracje: {HasIllustrations}";
     }
 }

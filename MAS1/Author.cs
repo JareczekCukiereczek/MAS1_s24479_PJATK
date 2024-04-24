@@ -8,7 +8,7 @@ public class Author
         Name = name;
     }
 
-    public override string ToString()
+    public override string ToString()//przysloniecie
     {
         return Name;
     }
