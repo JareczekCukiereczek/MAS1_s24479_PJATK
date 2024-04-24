@@ -8,7 +8,7 @@ public class Library
 
     public void AddBook(Book book) => Books.Add(book);
     public void RemoveBook(Book book) => Books.Remove(book);
-    public void ShowAllBooks()
+    public void ShowBooks()
     {
         int i = 1;
         foreach (var book in Books)
@@ -19,7 +19,7 @@ public class Library
         }
     }
 
-    public double CalculateAverageRating()
+    public double CalcAvg()
     {
         if (Books.Count == 0)
         {
@@ -56,8 +56,8 @@ public class Library
     // Zapis
     public void SaveLibToFile()
     {
-        var filePath = "/Users/kuba/Documents/MAS/MAS1/MAS1/MAS1/LibraryExtent.txt";
-        File.WriteAllText(filePath, SerializeLibrary());
+        var pathToFile = "/Users/kuba/Documents/MAS/MAS1/MAS1/MAS1/LibraryExtent.txt";
+        File.WriteAllText(pathToFile, SerializeLibrary());
     }
 
    //Odczyt
@@ -72,22 +72,22 @@ public class Library
         }
         else
         {
-            Console.WriteLine("LibraryExtent.txt does not exist or is empty. Creating a new library.");
+            Console.WriteLine("LibraryExtent.txt nie istnieje lub jest pusty. Stworz nowa biblioteke.");
         }
 
         return library;
     }
     
-    public void RemoveBook(int bookIndex)
+    public void RemoveBook(int index)
     {
-        if (bookIndex < 0 || bookIndex >= Books.Count)
+        if (index < 0 || index >= Books.Count)
         {
-            Console.WriteLine("Invalid book index.");
+            Console.WriteLine("Zly index.");
             return;
         }
 
-        Books.RemoveAt(bookIndex);
-        Console.WriteLine("Book removed successfully!");
+        Books.RemoveAt(index);
+        Console.WriteLine("Ksiazka usunieta poprawnie!");
     }
 
     public void RemoveBook(string title)
@@ -96,11 +96,11 @@ public class Library
         if (bookToRemove != null)
         {
             Books.Remove(bookToRemove);
-            Console.WriteLine("Book removed successfully!");
+            Console.WriteLine("Ksiazka usunieta poprawnie!");
         }
         else
         {
-            Console.WriteLine("Book not found.");
+            Console.WriteLine("Nie znaleziono ksiazki.");
         }
     }
 

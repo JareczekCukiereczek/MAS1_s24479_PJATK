@@ -32,7 +32,7 @@ namespace MAS1
                 switch (choice)
                 {
                     case 1:
-                        library.ShowAllBooks();
+                        library.ShowBooks();
                         break;
                     case 2:
                         AddBook(library);
@@ -41,7 +41,7 @@ namespace MAS1
                         RemoveBook(library);
                         break;
                     case 4:
-                        var averageRating = library.CalculateAverageRating();
+                        var averageRating = library.CalcAvg();
                         Console.WriteLine($"Srednia ocena ksiazek: {averageRating}");
                         break;
                     case 5:
