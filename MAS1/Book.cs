@@ -1,6 +1,5 @@
 ﻿namespace MAS1;
-public class Book
-{
+public class Book {
     public string Title { get; set; }
     public Author Author { get; set; } // Atrybut złozony
     public string ISBN { get; set; }// Atrybut obiektowy
@@ -11,8 +10,7 @@ public class Book
     public DateTime AddedDate { get; set; }
     private DateTime _salesDeadline;
 
-    public DateTime SalesDeadline
-    {
+    public DateTime SalesDeadline {
         get => _salesDeadline;
         set
         {
@@ -33,8 +31,7 @@ public class Book
     //atrubt ocena ksiąki                                                                   +
     
 
-    public Book(string title, Author author, string isbn, int year)
-    {
+    public Book(string title, Author author, string isbn, int year) {
         Title = title;
         Author = author;
         ISBN = isbn;
@@ -43,13 +40,11 @@ public class Book
         SalesDeadline = AddedDate.AddDays(365);
     }
 
-    public void SetSalesDeadline(DateTime deadline)
-    {
+    public void SetSalesDeadline(DateTime deadline) {
         SalesDeadline = deadline;
     }
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"Tytul: {Title}, Autor: {Author}, ISBN: {ISBN}, Rok: {Year}, Data dodania: {AddedDate.ToString("dd-MM-yyyy")}, Ilosc dni dopuszczenia do sprzedazy: {DaysUntilDeadline}, Ocena: {(RatingAllBooks.HasValue ? RatingAllBooks.ToString() : "Brak oceny")}, Ma ilustracje: {HasIllustrations}";
     }
 }

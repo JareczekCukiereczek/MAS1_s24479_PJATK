@@ -1,15 +1,13 @@
 ﻿using System.Text.Json;
 
 namespace MAS1;
-public class Library
-{
+public class Library {
     public static List<Book> Books { get; set; } = new List<Book>(); // ekstensja 
     
 
     public void AddBook(Book book) => Books.Add(book);
     public void RemoveBook(Book book) => Books.Remove(book);
-    public void ShowBooks()
-    {
+    public void ShowBooks() {
         int i = 1;
         foreach (var book in Books)
         {
@@ -19,8 +17,7 @@ public class Library
         }
     }
 
-    public double CalcAvg()
-    {
+    public double CalcAvg() {
         if (Books.Count == 0)
         {
             return 0;
@@ -47,22 +44,19 @@ public class Library
 
     
     public string SerialLiB() => JsonSerializer.Serialize(Books);
-    public void DeserialLib(string json)
-    {
-        if (!string.IsNullOrWhiteSpace(json))
-            Books.AddRange(JsonSerializer.Deserialize<List<Book>>(json));
+    public void DeserialLib(string contentJson){
+        if (!string.IsNullOrWhiteSpace(contentJson))
+            Books.AddRange(JsonSerializer.Deserialize<List<Book>>(contentJson));
     }
 
     // Zapis
-    public void SaveLibToFile()
-    {
+    public void SaveLibToFile() {
         var pathToFile = "/Users/kuba/Documents/MAS/MAS1/MAS1/MAS1/LibraryExtent.txt";
         File.WriteAllText(pathToFile, SerialLiB());
     }
 
    //Odczyt
-    public static Library InitLibFromFile()
-    {
+    public static Library InitLibFromFile() {
         var library = new Library();
         var filePath = "/Users/kuba/Documents/MAS/MAS1/MAS1/MAS1/LibraryExtent.txt";
 
@@ -78,8 +72,7 @@ public class Library
         return library;
     }
     
-    public void RemoveBook(int index)
-    {
+    public void RemoveBook(int index) {
         if (index < 0 || index >= Books.Count)
         {
             Console.WriteLine("Zly index.");
@@ -90,8 +83,7 @@ public class Library
         Console.WriteLine("Ksiazka usunieta poprawnie!");
     }
 
-    public void RemoveBook(string title)
-    {
+    public void RemoveBook(string title) {
         var bookToRemove = Books.FirstOrDefault(book => book.Title.Equals(title));
         if (bookToRemove != null)
         {

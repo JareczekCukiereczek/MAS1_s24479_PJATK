@@ -54,17 +54,25 @@ namespace MAS1
             } while (loop);
         }
 
-        static void AddBook(Library library)
-        {
+        static void AddBook(Library library) {
             Console.WriteLine("Tytul: ");
             var title = Console.ReadLine();
             Console.WriteLine("Autor: ");
             var authorName = Console.ReadLine();
             var author = new Author(authorName);
-            Console.WriteLine("ISBN: ");
-            var isbn = Console.ReadLine();
+            Console.WriteLine("ISBN (maksymalnie 9 cyfr): ");
+            string isbn;
+            do {
+                isbn = Console.ReadLine();
+                if (isbn.Length > 9) {
+                    Console.WriteLine("ISBN nie może mieć więcej niż 9 cyfr. Wprowadź ponownie: ");
+                }
+            } while (isbn.Length > 9);
             Console.WriteLine("Rok: ");
-            var year = int.Parse(Console.ReadLine());
+            int year;
+            while (!int.TryParse(Console.ReadLine(), out year) || year > 2024) {
+                Console.WriteLine("Zly format lub rok nie moze byc pozniejszy niz 2024. Wprowadz ponownie: ");
+            }
             Console.WriteLine("Deadline sprzedazy (yyyy-MM-dd): ");
             DateTime salesDeadline;
             while (!DateTime.TryParseExact(Console.ReadLine(), "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out salesDeadline))
@@ -95,8 +103,7 @@ namespace MAS1
         }
 
 
-        static void RemoveBook(Library library)
-        {
+        static void RemoveBook(Library library) {
             Console.WriteLine("1. Usun wg. index");
             Console.WriteLine("2. Usun wg. title");
             Console.Write("Wprowadz numer: ");
